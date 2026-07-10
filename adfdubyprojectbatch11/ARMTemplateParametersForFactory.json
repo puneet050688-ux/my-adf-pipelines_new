@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfdubyprojectbatch11"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"MySql1_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adlsgen2batch11.dfs.core.windows.net/"
+		},
+		"MySql1_properties_typeProperties_server": {
+			"value": "192.168.1.4"
+		},
+		"MySql1_properties_typeProperties_database": {
+			"value": "yashidb"
+		},
+		"MySql1_properties_typeProperties_username": {
+			"value": "vboxuser"
+		}
+	}
+}
