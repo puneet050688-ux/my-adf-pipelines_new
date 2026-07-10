@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "`industry_sic`.txt",
 				"folderPath": "raw/industry_sic",
 				"fileSystem": "data"
 			},
