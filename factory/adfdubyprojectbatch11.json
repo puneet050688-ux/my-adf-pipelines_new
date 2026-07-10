@@ -1,0 +1,15 @@
+{
+	"name": "adfdubyprojectbatch11",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "daa9d8fc-8d49-4b2b-ad0f-5132ccd7232c",
+		"tenantId": "c3aeca18-717f-471b-9340-cc890eb0f24e"
+	}
+}
