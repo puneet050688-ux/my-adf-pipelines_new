@@ -1,6 +1,76 @@
 {
 	"name": "PL_PARENTPIPELINE",
 	"properties": {
+		"activities": [
+			{
+				"name": "LKUP_MYSQLTABLE_WATERMARK_DW",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "MySqlSource",
+						"query": {
+							"value": "SELECT TableSchema, TableName, WatermarkColumn, LastLoadValue FROM Retail_DW_Dev.ADF_Watermark_Table;\n",
+							"type": "Expression"
+						}
+					},
+					"dataset": {
+						"referenceName": "MySqlTable1",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LKUP_MYSQLTABLE_WATERMARK_DW",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LKUP_MYSQLTABLE_WATERMARK_DW').output.value\n",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "EXEC_SQL_INCREMENTAL",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "TableSchema"
+								}
+							],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "PL_CHILDPIPELINE",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
+						}
+					]
+				}
+			}
+		],
 		"annotations": []
 	}
 }
